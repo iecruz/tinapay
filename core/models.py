@@ -37,7 +37,6 @@ class OrderList(BaseModel):
 
 def initialize():
     db.connect()
-    # db.drop_tables([Order, OrderList], safe=True)
     db.create_tables([User, Bread, Order, OrderList], safe=True)
 
 def drop(table):
