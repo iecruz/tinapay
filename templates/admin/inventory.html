@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center">Bread Inventory</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% if bread %}
+            {% for i in bread %}
+            <tr>
+                <th scope="row">{{ i['id'] }}</th>
+                <td>{{ i['name'] }}</td>
+                <td>&#8369; {{ i['price'] }}</td>
+            </tr>
+            {% endfor %}
+        {% endif %}
+            <tr>
+                <form action="{{ url_for('admin.inventory') }}" method="post">
+                    <th scope="row"><button type="submit" class="btn btn-dark rounded-0">Add Bread</button></th>
+                    <td>
+                        {{ form.name(class_='rounded-0 border border-dark w-100') }}<br/>
+                        {% if form.name.errors %}
+                            {% for i in form.name.errors %}
+                                <small class="form-text text-danger">{{ i }}</small>
+                            {% endfor %}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{ form.price(class_='rounded-0 border border-dark w-100') }}<br/>
+                        {% if form.price.errors %}
+                            {% for i in form.price.errors %}
+                                <small class="form-text text-danger">{{ i }}</small>
+                            {% endfor %}
+                        {% endif %}
+                    </td>
+                </form>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

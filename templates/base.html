@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tinapay PH</title>
+
+    {% block head %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Martel">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% endblock %}
+</head>
+<body class="bg-white text-black">
+    {% block nav %}
+    <div class="container py-3 mt-5">
+        <h1 class="display-4 text-center mb-0">Tinapay</h1>
+        <h4 class="text-center mb-2 mb-md-5">Bread is life</h4>
+        <hr class="border border-dark mb-2 mt-3">
+        <a href="#menuCollapse" data-toggle="collapse" class="d-md-none d-block text-black text-center font-weight-bold">Menu</a>
+        <div id="menuCollapse" class="collapse show container">
+            <div class="d-flex flex-md-row justify-content-md-around flex-md-wrap flex-column">
+                <a href="{{ url_for('index') }}" class="text-center text-black font-weight-bold">Home</a>
+                <a href="#" class="text-center text-black font-weight-bold">Bread</a>
+                <a href="{{ url_for('shop.shop') }}" class="text-center text-black font-weight-bold">Shop</a>
+                <a href="#" class="text-center text-black font-weight-bold">About</a>
+                {% if session['username'] %}
+                <a href="{{ url_for('users.logout') }}" class="text-center text-black font-weight-bold">Logout</a>
+                {% else %}
+                <a href="{{ url_for('users.login') }}" class="text-center text-black font-weight-bold">Login</a>
+                {% endif %}
+            </div>
+        </div>
+        <hr class="border border-dark mt-2 mb-3">
+    </div>
+    {% endblock %}
+
+    {% block content %}
+    {% endblock %}
+
+    {% block footer %}
+    <div class="container mt-5 mb-4">
+        <hr class="border border-dark">
+        <div class="row justify-content-around">
+            <div class="col-12 col-md-4 my-2 my-md-0">
+                <h4>Contact Us</h4>
+                <hr class="border border-dark">
+                <p><i class="fa fa-phone"></i> +63 916 269 0016</p>
+            </div>
+            <div class="col-12 col-md-4 my-2 my-md-0">
+                <h4>Follow Us</h4>
+                <hr class="border border-dark">
+                <a href="https://www.facebook.com/nathan.abriol.1"><i class="fab fa-facebook"></i> Facebook</a>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+
+    {% block scripts %}
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,79 @@
+{% from "_formhelpers.html" import render_field %}
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-3">
+    <div class="row">
+        <div class="col-12 col-md-8 order-2 order-md-1">
+            <table class="table d-none d-md-table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col" class="text-center">Quantity</th>
+                        <th scope="col" class="text-center">Name</th>
+                        <th scope="col" class="text-center">Price</th>
+                        <th scope="col" class="text-center">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for id, qty in session['basket'].items() %}
+                    <tr>
+                        <th scope="row">{{ loop.index }}</th>
+                        <td class="text-center">{{ qty }}</td>
+                        <td class="text-center">{{ bread[id]['name'] }}</td>
+                        <td class="text-center">&#8369; {{ bread[id]['price'] }}</td>
+                        <td class="text-center">&#8369; {{ bread[id]['price'] * qty }}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <th colspan="4">Total</th>
+                        <td class="text-center">&#8369; {{ total }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table border d-md-none d-table mt-3">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-center">Qty</th>
+                        <th scope="col" class="text-center">Name</th>
+                        <th scope="col" class="text-center">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for id, qty in session['basket'].items() %}
+                    <tr>
+                        <td class="text-center">{{ qty }}</td>
+                        <td class="text-center">{{ bread[id]['name'] }}</td>
+                        <td class="text-center">&#8369; {{ bread[id]['price'] * qty }}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <th colspan="2">Total</th>
+                        <td class="text-center">&#8369; {{ total }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+        
+        <div class="col-12 col-md-4 order-1 order-md-2">
+            <div class="border border-dark p-4">
+                <h4 class="text-center font-weight-bold">Select your bread</h4>
+                <form action="" method="post">
+                    {{ render_field(form.bread) }}
+                    {{ render_field(form.quantity) }}
+                    <div class="btn-group d-flex w-100 my-2">
+                        <button type="submit" class="btn btn-dark rounded-0 w-100 mr-1">Add to Basket</button>
+                        <a href="{{ url_for('shop.empty_basket') }}" class="btn btn-dark rounded-0 w-100 ml-1">Empty Basket</a>
+                    </div>
+                    {% if session['basket'] %}
+                    <a href="{{ url_for('shop.place_order') }}" class="btn btn-dark btn-block rounded-0">Place Order</a>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

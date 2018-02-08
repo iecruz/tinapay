@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if session %}
+<div class="container py-3">
+    <h4 class="text-center">Good Day, {{ session['first_name'] }} {{ session['last_name'] }}!</h4>
+</div>
+{% endif %}
+{% endblock %}

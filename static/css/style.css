@@ -1,0 +1,15 @@
+body {
+    font-family: 'Martel';
+}
+
+.custom-nav a {
+    color: #000;
+}
+
+.text-black {
+    color: #000 !important;
+}
+
+.bg-black {
+    background-color: #000 !important;
+}

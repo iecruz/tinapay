@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-3">
+    <div class="d-block mx-md-5 p-4" style="border: 5px double #000;">
+        <h2 class="text-center font-weight-bold mb-4">Summary of your Order</h2>
+        <table class="table d-none d-md-table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col" class="text-center">Quantity</th>
+                    <th scope="col" class="text-center">Name</th>
+                    <th scope="col" class="text-center">Price</th>
+                    <th scope="col" class="text-center">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for id, qty in basket.items() %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <td class="text-center">{{ qty }}</td>
+                    <td class="text-center">{{ bread[id]['name'] }}</td>
+                    <td class="text-center">&#8369; {{ bread[id]['price'] }}</td>
+                    <td class="text-center">&#8369; {{ bread[id]['price'] * qty }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <th colspan="4">Total</th>
+                    <td class="text-center">&#8369; {{ total }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table d-md-none d-table">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center">Qty</th>
+                    <th scope="col" class="text-center">Name</th>
+                    <th scope="col" class="text-center">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for id, qty in basket.items() %}
+                <tr>
+                    <th class="text-center">{{ qty }}</th>
+                    <td class="text-center">{{ bread[id]['name'] }}</td>
+                    <td class="text-center">&#8369; {{ bread[id]['price'] * qty }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <th colspan="2">Total</th>
+                    <td class="text-center">&#8369; {{ total }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p class="text-center font-weight-bold">Thank you and have a nice day!</p>
+        <a href="{{ url_for('index') }}" class="btn btn-dark rounded-0 d-block mx-auto w-75">Return to home</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% from "_formhelpers.html" import render_field %}
+{% extends "base.html" %}
+
+{% block nav %}{% endblock %}
+
+{% block content %}
+<div class="container my-5 py-5">
+    <div class="row align-items-center">
+        <div class="col-12 col-md-6">
+            <h1 class="display-3 text-center mb-0">Tinapay PH</h1>
+            <h4 class="text-center mb-5">Bread is life</h4>
+        </div>
+        <div class="col-12 col-md-6">
+            <h1 class="mb-4">Login to Tinapay PH</h1>
+            <form action="{{ url_for('users.login')}}" method="post">
+                {{ render_field(form.username) }}
+                {{ render_field(form.password) }}
+                <div class="d-flex w-100">
+                    <button type="submit" class="btn btn-dark rounded-0 mr-1 w-100">Login</button>
+                    <a href="{{ url_for('users.register') }}" class="btn btn-dark rounded-0 ml-1 w-100">Register</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
