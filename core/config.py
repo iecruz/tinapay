@@ -10,6 +10,9 @@ class Config(object):
 class DevelopmentConfig(Config):
     DEBUG=True
 
+class DevelopmentConfig(Config):
+    TESTING=True
+
 class ProductionConfig(Config):
     DB_HOST='ec2-54-217-236-201.eu-west-1.compute.amazonaws.com'
     DB_USER='xnmnsceybattno'
