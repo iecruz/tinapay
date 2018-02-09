@@ -39,7 +39,8 @@ class OrderList(BaseModel):
 db_table=[User, Bread, Order, OrderList]
 
 def initialize():
-    db.connect()
+    if not db:
+        db.connect()
     db.create_tables(db_table, safe=True)
 
 def close():
