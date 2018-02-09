@@ -1,13 +1,10 @@
+from flask import current_app
 from peewee import *
 from playhouse.shortcuts import model_to_dict
 import datetime
 
-db = PostgresqlDatabase(
-    'yapanit',
-    user='postgres',
-    password='postgres',
-    host='localhost'
-)
+db_config={'database': 'yapanit', 'user':'postgres', 'password':'postgres', 'host':'localhost'}
+db = PostgresqlDatabase(db_config['database'], user=db_config['user'], password=db_config['password'], host=db_config['host'])
 
 class BaseModel(Model):
     class Meta:
@@ -34,14 +31,19 @@ class OrderList(BaseModel):
     order=ForeignKeyField(Order)
     bread=ForeignKeyField(Bread)
     quantity=IntegerField()
+    
+db_table=[User, Bread, Order, OrderList]
+
+def config(db, **kwargs):
+    db_config['database']=db
+    if kwargs:
+        for key, val in kwargs.items():
+            db_config['key']=val
+    db = PostgresqlDatabase(db_config['database'], user=db_config['user'], password=db_config['password'], host=db_config['host'])
 
 def initialize():
     db.connect()
-    # db.drop_tables([Order, OrderList], safe=True)
-    db.create_tables([User, Bread, Order, OrderList], safe=True)
-
-def drop(table):
-    db.drop_table(table, fail_silently=True)
+    db.create_tables(db_table, safe=True)
 
 def close():
     db.close()

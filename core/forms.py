@@ -2,6 +2,7 @@ from wtforms import Form, StringField, DecimalField, IntegerField, PasswordField
 from wtforms.validators import *
 from playhouse.shortcuts import model_to_dict
 from core import models
+import peewee
 
 class RegistrationForm(Form):
     first_name=StringField('First Name', [Length(max=32), InputRequired()])
@@ -19,5 +20,10 @@ class AddBreadForm(Form):
     price=DecimalField('Price', [NumberRange(min=0), InputRequired()], places=2)
 
 class AddOrderForm(Form):
-    bread=SelectField('Bread', choices=[(bread['id'], bread['name']) for bread in (model_to_dict(bread) for bread in models.Bread.select())], coerce=int)
+    try:
+        bread=SelectField('Bread', choices=[(bread['id'], bread['name']) for bread in (model_to_dict(bread) for bread in models.Bread.select())], coerce=int)
+    except peewee.DoesNotExist:
+        bread=SelectField('Bread', choices=[])
+    except peewee.ProgrammingError:
+        bread=SelectField('Bread', choices=[])
     quantity=IntegerField('Quantity', [NumberRange(min=0), InputRequired()])
