@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, session, g
+from flask import Blueprint, render_template, request, redirect, url_for, session
 from peewee import *
 from playhouse.shortcuts import model_to_dict
 from core.models import *
