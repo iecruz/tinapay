@@ -3,14 +3,14 @@ from peewee import *
 from playhouse.shortcuts import model_to_dict
 import datetime
 
-db_config={
-    'database':'d7mq3n8b6u3sfc', 
-    'user':'xnmnsceybattno', 
-    'password':'f9f5203832a95dddcdac98aff4e83ca33a7b4778f5b87ae89f72364ea08d0da4', 
-    'host':'ec2-54-217-236-201.eu-west-1.compute.amazonaws.com'
-}
-# db_config={'database': 'yapanit', 'user':'postgres', 'password':'postgres', 'host':'localhost'}
-db = PostgresqlDatabase(db_config['database'], user=db_config['user'], password=db_config['password'], host=db_config['host'])
+# db_config={
+#     'database':'d7mq3n8b6u3sfc', 
+#     'user':'xnmnsceybattno', 
+#     'password':'f9f5203832a95dddcdac98aff4e83ca33a7b4778f5b87ae89f72364ea08d0da4', 
+#     'host':'ec2-54-217-236-201.eu-west-1.compute.amazonaws.com'
+# }
+db_config={'database': 'yapanit', 'user':'postgres', 'password':'postgres', 'host':'localhost'}
+db=PostgresqlDatabase(db_config['database'], user=db_config['user'], password=db_config['password'], host=db_config['host'])
 
 class BaseModel(Model):
     class Meta:
