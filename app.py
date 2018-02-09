@@ -3,10 +3,7 @@ from core import models
 from views import users, admin, shop
 
 app = Flask(__name__)
-if app.config['SERVER_NAME']:
-    app.config.from_object('core.config.ProductionConfig')
-else:
-    app.config.from_object('core.config.DevelopmentConfig')
+app.config.from_object('core.config.ProductionConfig')
 app.register_blueprint(users.app)
 app.register_blueprint(admin.app, url_prefix='/access')
 app.register_blueprint(shop.app)
