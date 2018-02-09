@@ -13,12 +13,12 @@ app.register_blueprint(shop.app)
 
 @app.before_request
 def before_request():
-    models.config(
-        app.config['DB_DATABASE'], 
-        user=app.config['DB_USER'],
-        password=app.config['DB_PASSWORD'],
-        host=app.config['DB_HOST']
-    )
+    # models.config(
+    #     app.config['DB_DATABASE'], 
+    #     user=app.config['DB_USER'],
+    #     password=app.config['DB_PASSWORD'],
+    #     host=app.config['DB_HOST']
+    # )
     models.initialize()
 
 @app.teardown_request
