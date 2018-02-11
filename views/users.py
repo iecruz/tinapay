@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
 from flask_bcrypt import Bcrypt
-from core.models import *
-from core.forms import *
+from core.models import User
+from core.forms import LoginForm, RegistrationForm
 
 app = Blueprint('users', __name__)
 bcrypt = Bcrypt()
