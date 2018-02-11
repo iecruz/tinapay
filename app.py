@@ -3,10 +3,7 @@ from views import users, admin, shop
 from core import models
 
 app = Flask(__name__)
-if app.config['LOGGER_NAME'] == 'app':
-    app.config.from_object('core.config.ProductionConfig')
-else:
-    app.config.from_object('core.config.DevelopmentConfig')
+app.config.from_object('core.config.ProductionConfig')
 app.register_blueprint(users.app)
 app.register_blueprint(admin.app, url_prefix='/access')
 app.register_blueprint(shop.app)
@@ -21,7 +18,7 @@ def teardown_request(exception):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', app=app.config)
 
 if __name__ == '__main__':
-    app.run(debug=app.config['DEBUG'])
+    app.run()

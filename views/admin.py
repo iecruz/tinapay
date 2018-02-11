@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-from core.models import *
-from core.forms import *
+from core.models import Bread, Order, OrderList
+from core.forms import AddBreadForm
 from playhouse.shortcuts import model_to_dict
 import datetime
 

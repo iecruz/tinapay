@@ -1,8 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
-from peewee import *
 from playhouse.shortcuts import model_to_dict
-from core.models import *
-from core.forms import *
+from core.models import Bread, User, Order, OrderList, db
+from core.forms import AddOrderForm
 
 app = Blueprint('shop', __name__)
 
