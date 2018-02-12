@@ -37,13 +37,25 @@ def order_card():
 @app.route('/order/list/')
 def order_list():
     try:
-        bread=[model_to_dict(bread) for bread in Bread.select()]
+        bread=[]
         total=float(0)
 
-        for i, item in enumerate(bread):
-            bread[i]['order']=model_to_dict(OrderList.select(fn.Sum(OrderList.quantity).alias('quantity')).join(Bread, on=(OrderList.bread==Bread.id)).where(Bread.id==item['id']).first())['quantity']
-            bread[i]['amount']="{0:.2f}".format(float(item['order'] * item['price']))
-            total=total+float(item['order'] * item['price'])
+        for item in [model_to_dict(bread) for bread in Bread.select()]:
+            quantity=model_to_dict(
+                OrderList.select(fn.Sum(OrderList.quantity).alias('quantity'))
+                .join(Order, on=(OrderList.order==Order.id))
+                .join(Bread, on=(OrderList.bread==Bread.id))
+                .where(Order.date==datetime.date.today(), Bread.id==item['id'])
+                .get())['quantity']
+
+            if quantity is None:
+                continue
+
+            item['order']=quantity
+            item['amount']="{0:.2f}".format(float(quantity * item['price']))
+
+            bread.append(item)
+            total=total+float(quantity * item['price'])
 
     except DoesNotExist:
         bread=None
