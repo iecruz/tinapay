@@ -1,10 +1,10 @@
 from flask import Flask, render_template, request, url_for, session
-from views import users, admin, shop
+from views import user, admin, shop
 from core import models
 
 app = Flask(__name__)
 app.config.from_object('core.config.ProductionConfig')
-app.register_blueprint(users.app)
+app.register_blueprint(user.app)
 app.register_blueprint(admin.app, url_prefix='/access')
 app.register_blueprint(shop.app)
 
@@ -18,7 +18,7 @@ def teardown_request(exception):
 
 @app.route('/')
 def index():
-    return render_template('index.html', app=app.config)
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run()

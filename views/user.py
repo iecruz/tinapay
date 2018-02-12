@@ -1,9 +1,10 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
 from flask_bcrypt import Bcrypt
+from peewee import DoesNotExist
 from core.models import User
 from core.forms import LoginForm, RegistrationForm
 
-app = Blueprint('users', __name__)
+app = Blueprint('user', __name__)
 bcrypt = Bcrypt()
 
 @app.route('/register/', methods=['GET', 'POST'])
@@ -11,8 +12,8 @@ def register():
     form=RegistrationForm(request.form)
     if request.method == 'POST' and form.validate():
         user=User.create(
-            first_name=form.first_name.data,
-            last_name=form.last_name.data,
+            first_name=form.first_name.data.title(),
+            last_name=form.last_name.data.title(),
             username=form.username.data,
             password=bcrypt.generate_password_hash(form.password.data)
         )
