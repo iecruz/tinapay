@@ -21,7 +21,7 @@ class AddBreadForm(Form):
 
 class AddOrderForm(Form):
     try:
-        bread=SelectField('Bread', choices=[(bread['id'], bread['name']) for bread in (model_to_dict(bread) for bread in models.Bread.select())], coerce=int)
+        bread=SelectField('Bread', choices=[(bread['id'], "{} (P {})".format(bread['name'], bread['price'])) for bread in (model_to_dict(bread) for bread in models.Bread.select())], coerce=int)
     except peewee.DoesNotExist:
         bread=SelectField('Bread', choices=[])
     except peewee.ProgrammingError:

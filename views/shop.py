@@ -1,9 +1,18 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
+from peewee import DoesNotExist
 from playhouse.shortcuts import model_to_dict
 from core.models import Bread, User, Order, OrderList, db
 from core.forms import AddOrderForm
 
 app = Blueprint('shop', __name__)
+
+@app.route('/menu/')
+def menu():
+    try:
+        bread=[model_to_dict(bread) for bread in Bread.select()]
+    except DoesNotExist:
+        bread=None
+    return render_template('menu.html', bread=bread)
 
 @app.route('/shop/', methods=['GET', 'POST'])
 def shop():

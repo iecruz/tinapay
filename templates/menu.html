@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-3">
+    <div class="d-block mx-md-5 p-4" style="border: 5px double #000;">
+        <h2 class="text-center font-weight-bold mb-4">Menu</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in bread %}
+                    <tr>
+                        <th scope="row">{{ i['name'] }}</th>
+                        <td>&#8369; {{ i['price'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>    
+</div>
+{% endblock %}

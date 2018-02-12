@@ -13,23 +13,25 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     {% endblock %}
 </head>
-<body class="bg-white text-black">
+<body class="bg-white text-black py-4">
     {% block nav %}
-    <div class="container py-3 mt-5">
+    <div class="container py-3">
         <h1 class="display-4 text-center mb-0">Tinapay</h1>
-        <h4 class="text-center mb-2 mb-md-5">Bread is life</h4>
+        <h4 class="text-center mb-2 mb-md-2">Bread is life</h4>
         <hr class="border border-dark mb-2 mt-3">
         <a href="#menuCollapse" data-toggle="collapse" class="d-md-none d-block text-black text-center font-weight-bold">Menu</a>
         <div id="menuCollapse" class="collapse show">
             <div class="d-flex flex-md-row justify-content-md-around flex-md-wrap flex-column">
                 <a href="{{ url_for('index') }}" class="text-center text-black font-weight-bold">Home</a>
-                <a href="#" class="text-center text-black font-weight-bold">Bread</a>
+                <a href="{{ url_for('shop.menu') }}" class="text-center text-black font-weight-bold">Bread</a>
+                {% if session['username'] %}
                 <a href="{{ url_for('shop.shop') }}" class="text-center text-black font-weight-bold">Shop</a>
+                {% endif %}
                 <a href="#" class="text-center text-black font-weight-bold">About</a>
                 {% if session['username'] %}
-                <a href="{{ url_for('users.logout') }}" class="text-center text-black font-weight-bold">Logout</a>
+                <a href="{{ url_for('user.logout') }}" class="text-center text-black font-weight-bold">Logout</a>
                 {% else %}
-                <a href="{{ url_for('users.login') }}" class="text-center text-black font-weight-bold">Login</a>
+                <a href="{{ url_for('user.login') }}" class="text-center text-black font-weight-bold">Login</a>
                 {% endif %}
             </div>
         </div>
