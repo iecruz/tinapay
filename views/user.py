@@ -59,9 +59,7 @@ def profile():
         order_list=[model_to_dict(row) for row in OrderList
             .select()
             .join(Order, on=(OrderList.order==Order.id))
-            .where(Order.user==session['username'])
-            .order_by(Order.date.desc())
-            .limit(10)]
+            .where(Order.user==session['username'])]
         order=[model_to_dict(row) for row in Order
             .select()
             .where(Order.user==session['username'])
@@ -69,4 +67,5 @@ def profile():
             .limit(10)]
     except DoesNotExist:
         order=None
+        order_list=None
     return render_template('user/profile.html', order=order, order_list=order_list)
