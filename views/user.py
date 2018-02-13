@@ -1,7 +1,8 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
 from flask_bcrypt import Bcrypt
 from peewee import DoesNotExist
-from core.models import User
+from playhouse.shortcuts import model_to_dict
+from core.models import User, Order, OrderList
 from core.forms import LoginForm, RegistrationForm
 
 app = Blueprint('user', __name__)
@@ -17,7 +18,6 @@ def register():
             username=form.username.data,
             password=bcrypt.generate_password_hash(form.password.data)
         )
-        session['id']=user.id
         session['username']=user.username
         session['first_name']=user.first_name
         session['last_name']=user.last_name
@@ -34,7 +34,6 @@ def login():
             if not bcrypt.check_password_hash(user.password, form.password.data):
                 form.password.errors.append('Incorrect Password.')
             else:
-                session['id']=user.id
                 session['username']=user.username
                 session['first_name']=user.first_name
                 session['last_name']=user.last_name
@@ -46,9 +45,28 @@ def login():
 
 @app.route('/logout/', methods=['GET', 'POST'])
 def logout():
-    session.pop('id', None)
     session.pop('username', None)
     session.pop('first_name', None)
     session.pop('last_name', None)
     session.pop('basket', None)
     return redirect(url_for('index'))
+
+@app.route('/profile/', methods=['GET', 'POST'])
+def profile():
+    if 'username' not in session:
+        return redirect(url_for('user.login'))
+    try:
+        order_list=[model_to_dict(row) for row in OrderList
+            .select()
+            .join(Order, on=(OrderList.order==Order.id))
+            .where(Order.user==session['username'])
+            .order_by(Order.date.desc())
+            .limit(10)]
+        order=[model_to_dict(row) for row in Order
+            .select()
+            .where(Order.user==session['username'])
+            .order_by(Order.date.desc())
+            .limit(10)]
+    except DoesNotExist:
+        order=None
+    return render_template('user/profile.html', order=order, order_list=order_list)

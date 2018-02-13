@@ -15,32 +15,35 @@
 </head>
 <body class="bg-white text-black py-4">
     {% block nav %}
-    <div class="container py-3">
+    <div class="container py-md-3">
         <h1 class="display-4 text-center mb-0">Tinapay</h1>
-        <h4 class="text-center mb-2 mb-md-2">Bread is life</h4>
-        <hr class="border border-dark mb-2 mt-3">
+        <h4 class="text-center mb-2 mb-md-3">Bread is life</h4>
+        <hr class="border border-dark my-2">
         <a href="#menuCollapse" data-toggle="collapse" class="d-md-none d-block text-black text-center font-weight-bold">Menu</a>
         <div id="menuCollapse" class="collapse show">
             <div class="d-flex flex-md-row justify-content-md-around flex-md-wrap flex-column">
                 <a href="{{ url_for('index') }}" class="text-center text-black font-weight-bold">Home</a>
-                <a href="{{ url_for('shop.menu') }}" class="text-center text-black font-weight-bold">Bread</a>
+                <a href="{{ url_for('menu') }}" class="text-center text-black font-weight-bold">Bread</a>
                 {% if session['username'] %}
                 <a href="{{ url_for('shop.shop') }}" class="text-center text-black font-weight-bold">Shop</a>
-                {% endif %}
-                <a href="#" class="text-center text-black font-weight-bold">About</a>
-                {% if session['username'] %}
+                <a href="{{ url_for('user.profile') }}" class="text-center text-black font-weight-bold">Profile</a>
                 <a href="{{ url_for('user.logout') }}" class="text-center text-black font-weight-bold">Logout</a>
                 {% else %}
+                <a href="{{ url_for('user.register') }}" class="text-center text-black font-weight-bold">Register</a>
                 <a href="{{ url_for('user.login') }}" class="text-center text-black font-weight-bold">Login</a>
                 {% endif %}
             </div>
         </div>
-        <hr class="border border-dark mt-2 mb-3">
+        <hr class="border border-dark my-2">
     </div>
     {% endblock %}
 
-    {% block content %}
-    {% endblock %}
+    {% block outer_content %}
+        <div class="container py-3 py-md-3">
+            {% block inner_content %}
+            {% endblock inner_content %}
+        </div>
+    {% endblock outer_content %}
 
     {% block footer %}
     <div class="container mt-5 mb-4">

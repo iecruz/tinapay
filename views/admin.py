@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, session
 from peewee import DoesNotExist, fn
 from playhouse.shortcuts import model_to_dict
 from core.models import Bread, Order, OrderList
@@ -32,7 +32,7 @@ def order_card():
         order=None
         order_list=None
 
-    return render_template('admin/order.html', order_list=order_list, order=order)
+    return render_template('admin/card.html', order_list=order_list, order=order)
 
 @app.route('/order/list/')
 def order_list():
