@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block inner_content %}
+<h2 class="text-center font-weight-bold mb-4">Orders today</h2>
+<div class="d-block card-columns">
+    {% for order in order %}
+    <div class="card card-body rounded-0 border border-dark">
+        <h4>{{ order['user']['first_name'] }} {{ order['user']['last_name'] }}</h4>
+        <ul>
+            {% for item in order_list if item['order'] == order %}
+            <li>{{ item['quantity'] }} {{ item['bread']['name'] }}</li>
+            {% endfor %}
+        </ul>
+        <span>Total: &#8369; <span class="font-weight-bold">{{ order['total'] }}</span></span>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

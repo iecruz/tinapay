@@ -36,6 +36,7 @@ class Order(BaseModel):
     total=DecimalField(decimal_places=2)
     date=DateTimeField(default=datetime.date.today())
     time=TimeField(default=datetime.datetime.now().time())
+    status=CharField(default='Order Placed')
 
 class OrderList(BaseModel):
     order=ForeignKeyField(Order)
