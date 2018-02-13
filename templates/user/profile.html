@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block inner_content %}
+<div class="row mt-0 mt-md-3">
+    <div class="col-12 col-md-4">
+        <h4 class="text-center">{{ session['first_name'] }} {{ session['last_name'] }}</h4>
+        <hr class="d-block d-md-none border border-dark">
+        <div class="list-group list-group-flush">
+            <a href="#" class="list-group-item list-group-item-action text-black"><i class="fa fa-history mr-2"></i>Order History</a>
+            <a href="#" class="list-group-item list-group-item-action text-black"><i class="fa fa-cog mr-2"></i>Settings</a>
+            <a href="#" class="list-group-item list-group-item-action text-black"><i class="fa fa-comment mr-2"></i>Send Feedback</a>
+            <a href="{{ url_for('user.logout') }}" class="list-group-item list-group-item-action text-black"><i class="fa fa-sign-out-alt mr-2"></i>Logout</a>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-8">
+        <hr class="d-block d-md-none border border-dark">
+        <h4 class="text-center">Recent Order</h4>
+        <hr class="d-block d-md-none border border-dark">
+        <div class="card-columns mt-3">
+            {% for i in order %}
+            <div class="card card-body rounded-0 border border-dark">
+                <h5 class="text-center">{{ i['date'].date().strftime('%d %B %Y') }}</h5>
+                <ul>
+                    {% for item in order_list if item['order'] == i %}
+                    <li>{{ item['quantity'] }} {{ item['bread']['name'] }}</li>
+                    {% endfor %}
+                </ul>
+                <small class="d-block">Total: &#8369; <span class="font-weight-bold">{{ i['total'] }}</span></small>
+                <small class="d-block">Status: <span class="font-weight-bold">{{ i['status'] }}</span></small>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

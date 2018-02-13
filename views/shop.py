@@ -6,21 +6,13 @@ from core.forms import AddOrderForm
 
 app = Blueprint('shop', __name__)
 
-@app.route('/menu/')
-def menu():
-    try:
-        bread=[model_to_dict(bread) for bread in Bread.select()]
-    except DoesNotExist:
-        bread=None
-    return render_template('menu.html', bread=bread)
-
 @app.route('/shop/', methods=['GET', 'POST'])
 def shop():
     form=AddOrderForm(request.form)
     total=float(0)
 
     if 'username' not in session:
-        return redirect(url_for('index'))
+        return redirect(url_for('user.login'))
 
     if 'basket' not in session:
         session['basket']={}
