@@ -5,13 +5,15 @@
 <div class="d-block card-columns">
     {% for order in order %}
     <div class="card card-body rounded-0 border border-dark">
-        <h4>{{ order['user']['first_name'] }} {{ order['user']['last_name'] }}</h4>
+        <h4 class="text-center">{{ order['user_name'] }}</h4>
         <ul>
-            {% for item in order_list if item['order'] == order %}
-            <li>{{ item['quantity'] }} {{ item['bread']['name'] }}</li>
+            {% for item in item if item['order'] == order['id'] %}
+            <li>{{ item['quantity'] }} {{ item['bread_name'] }}</li>
             {% endfor %}
         </ul>
-        <span>Total: &#8369; <span class="font-weight-bold">{{ order['total'] }}</span></span>
+        <span class="d-block">Total: &#8369; <span class="font-weight-bold">{{ order['total'] }}</span></span>
+        <small class="d-block">Status: <span class="font-weight-bold">{{ order['status'] }}</span></small>
+        <small class="d-block">Date: <span class="font-weight-bold">{{ order['date'].strftime('%d %B %Y') }}</span></small>
     </div>
     {% endfor %}
 </div>

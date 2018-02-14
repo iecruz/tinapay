@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, url_for, session
 from peewee import DoesNotExist
-from playhouse.shortcuts import model_to_dict
 from views import user, admin, shop
 from core import models
 
@@ -25,10 +24,10 @@ def index():
 @app.route('/menu/')
 def menu():
     try:
-        bread=[model_to_dict(bread) for bread in models.Bread.select()]
+        bread=[row for row in models.Bread.select().order_by(Bread.name).dicts()]
     except DoesNotExist:
         bread=None
     return render_template('menu.html', bread=bread)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
