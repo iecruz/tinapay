@@ -1,6 +1,5 @@
 from wtforms import Form, StringField, DecimalField, IntegerField, PasswordField, SelectField
 from wtforms.validators import *
-from playhouse.shortcuts import model_to_dict
 from core import models
 import peewee
 
@@ -21,7 +20,7 @@ class AddBreadForm(Form):
 
 class AddOrderForm(Form):
     try:
-        bread=SelectField('Bread', choices=[(bread['id'], "{} (P {})".format(bread['name'], bread['price'])) for bread in (model_to_dict(bread) for bread in models.Bread.select())], coerce=int)
+        bread=SelectField('Bread', choices=[(row['id'], "{} (P {})".format(row['name'], row['price'])) for row in models.Bread.select().order_by(models.Bread.name).dicts()], coerce=int)
     except peewee.DoesNotExist:
         bread=SelectField('Bread', choices=[])
     except peewee.ProgrammingError:

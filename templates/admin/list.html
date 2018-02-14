@@ -18,10 +18,10 @@
             {% for i in bread %}
             <tr>
                 <th class="d-none d-md-table-cell">{{ loop.index }}</th>
-                <td class="text-center">{{ i['order'] }}</td>
+                <td class="text-center">{{ i['count'] }}</td>
                 <td class="text-center">{{ i['name'] }}</td>
                 <td class="d-none d-md-table-cell text-center">&#8369; {{ i['price'] }}</td>
-                <td class="text-center">&#8369; {{ i['amount'] }}</td>
+                <td class="text-center">&#8369; {{ i['count'] * i['price'] }}</td>
             </tr>
             {% endfor %}
             <tr>

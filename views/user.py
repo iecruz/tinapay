@@ -1,8 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
 from flask_bcrypt import Bcrypt
 from peewee import DoesNotExist
-from playhouse.shortcuts import model_to_dict
-from core.models import User, Order, OrderList
+from core.models import User, Order, OrderList, Bread
 from core.forms import LoginForm, RegistrationForm
 
 app = Blueprint('user', __name__)
@@ -56,16 +55,20 @@ def profile():
     if 'username' not in session:
         return redirect(url_for('user.login'))
     try:
-        order_list=[model_to_dict(row) for row in OrderList
-            .select()
-            .join(Order, on=(OrderList.order==Order.id))
-            .where(Order.user==session['username'])]
-        order=[model_to_dict(row) for row in Order
+        item=[row for row in OrderList
+            .select(OrderList, Bread.name.alias('bread_name'))
+            .join(Bread)
+            .switch(OrderList)
+            .join(Order)
+            .where(Order.user==session['username'])
+            .dicts()]
+        order=[row for row in Order
             .select()
             .where(Order.user==session['username'])
             .order_by(Order.date.desc())
-            .limit(10)]
+            .limit(10)
+            .dicts()]
     except DoesNotExist:
         order=None
-        order_list=None
-    return render_template('user/profile.html', order=order, order_list=order_list)
+        item=None
+    return render_template('user/profile.html', order=order, item=item)
