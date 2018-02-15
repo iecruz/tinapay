@@ -5,7 +5,7 @@
 <div class="d-block card-columns">
     {% for order in order %}
     <div class="card card-body rounded-0 border border-dark">
-        <h4 class="text-center">{{ order['user_name'] }}</h4>
+        <h4 class="text-center font-weight-bold">{{ order['user_name'] }}</h4>
         <ul>
             {% for item in item if item['order'] == order['id'] %}
             <li>{{ item['quantity'] }} {{ item['bread_name'] }}</li>

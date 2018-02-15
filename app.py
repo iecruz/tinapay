@@ -30,4 +30,4 @@ def menu():
     return render_template('menu.html', bread=bread)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
