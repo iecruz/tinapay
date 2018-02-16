@@ -47,4 +47,4 @@ def handle_delivery(message):
     emit('order notification', message, namespace="/{}".format(message['username']), broadcast=True)
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    socketio.run(app)
