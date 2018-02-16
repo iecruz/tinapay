@@ -1,25 +1,20 @@
-function orderOnDelivery(e) {
-    var data = {
-        id: $(e.target).attr('data-key'),
-        status: 'On Delivery'
-    };
+$(function() {
+    if (!("Notification" in window)) {
+        console.log("This browser does not support desktop notification");
+    }
+    
+    else if (Notification.permission !== "denied") {
+        Notification.requestPermission();
+    }
+});
 
-    orderChangeStatus(data).done(function(response) {
-        if(response){
-            $(`span.status-text[data-key="${data.id}"]`).html(data.status)
-        }
-    });
-}
+var username = $('body').attr('data-user');
 
-function orderVoid(e) {
-    var data = {
-        id: $(e.target).attr('data-key'),
-        status: 'Void'
-    };
-
-    orderChangeStatus(data).done(function(response) {
-        if(response){
-            $(`span.status-text[data-key="${data.id}"]`).html(data.status)
-        }
+if (username) {
+    var socket = io(window.location.origin + '/' + username);
+    
+    socket.on('order notification', function(data) {
+        new Audio(window.location.origin + '/static/audio/notif.mp3').play();
+        new Notification('Delivery Status: ' + data['status']);
     });
 }

@@ -30,7 +30,7 @@ def order_card():
             .join(Bread)
             .dicts()]
         order=[order for order in Order
-            .select(Order, fn.Concat(User.first_name, ' ', User.last_name).alias('user_name'))
+            .select(Order, User.username, fn.Concat(User.first_name, ' ', User.last_name).alias('user_name'))
             .join(User)
             .where(Order.date==datetime.date.today())
             .dicts()]
