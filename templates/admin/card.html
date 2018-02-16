@@ -1,19 +1,32 @@
 {% extends "base.html" %}
 
+{% block scripts %}
+    {{ super() }}
+    <script defer src="{{ url_for('static', filename='js/api.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='js/admin.js') }}"></script>
+{% endblock %}
+
 {% block inner_content %}
 <h2 class="text-center font-weight-bold mb-4">Orders today</h2>
-<div class="d-block card-columns">
+<div class="row">
     {% for order in order %}
-    <div class="card card-body rounded-0 border border-dark">
-        <h4 class="text-center">{{ order['user_name'] }}</h4>
-        <ul>
-            {% for item in item if item['order'] == order['id'] %}
-            <li>{{ item['quantity'] }} {{ item['bread_name'] }}</li>
-            {% endfor %}
-        </ul>
-        <span class="d-block">Total: &#8369; <span class="font-weight-bold">{{ order['total'] }}</span></span>
-        <small class="d-block">Status: <span class="font-weight-bold">{{ order['status'] }}</span></small>
-        <small class="d-block">Date: <span class="font-weight-bold">{{ order['date'].strftime('%d %B %Y') }}</span></small>
+    <div class="col-12 col-md-4">
+        <div class="card card-body rounded-0 border border-dark">
+            <h4 class="text-center font-weight-bold">{{ order['user_name'] }}</h4>
+            <ul>
+                {% for item in item if item['order'] == order['id'] %}
+                <li>{{ item['quantity'] }} {{ item['bread_name'] }}</li>
+                {% endfor %}
+            </ul>
+            <span class="d-block">Total: &#8369; <span class="font-weight-bold">{{ order['total'] }}</span></span>
+            <small class="d-block">Status: <span class="font-weight-bold status-text" data-key="{{ order['id'] }}">{{ order['status'] }}</span></small>
+            <small class="d-block">Date: <span class="font-weight-bold">{{ order['date'].strftime('%d %B %Y') }}</span></small>
+
+            <div class="d-flex justify-content-around rounded-0 w-100 mt-3">
+                <button class="btn btn-dark rounded-0" data-key="{{ order['id'] }}" data-user="{{ order['username'] }}" onclick="orderOnDelivery(event)">On Delivery</button>
+                <button class="btn btn-dark rounded-0" data-key="{{ order['id'] }}" data-user="{{ order['username'] }}" onclick="orderVoid(event)">Void</button>
+            </div>
+        </div>
     </div>
     {% endfor %}
 </div>
