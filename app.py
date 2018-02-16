@@ -24,7 +24,7 @@ def index():
 @app.route('/menu/')
 def menu():
     try:
-        bread=[row for row in models.Bread.select().order_by(Bread.name).dicts()]
+        bread=[row for row in models.Bread.select().order_by(models.Bread.name).dicts()]
     except DoesNotExist:
         bread=None
     return render_template('menu.html', bread=bread)
