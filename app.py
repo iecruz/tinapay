@@ -1,10 +1,11 @@
 from flask import Flask, render_template, request, url_for, session
 from peewee import DoesNotExist
 from views import user, admin, shop
-from core import models
+from core import models, api
 
 app = Flask(__name__)
 app.config.from_object('core.config.ProductionConfig')
+app.register_blueprint(api.app, url_prefix='/api')
 app.register_blueprint(user.app)
 app.register_blueprint(admin.app, url_prefix='/a')
 app.register_blueprint(shop.app)
