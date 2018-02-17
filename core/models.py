@@ -3,7 +3,7 @@ from peewee import *
 import datetime
 
 app=Flask(__name__)
-app.config.from_object('core.config.DevelopmentConfig')
+app.config.from_object('core.config.ProductionConfig')
 
 db=PostgresqlDatabase(
     app.config['DB_DATABASE'],

@@ -8,7 +8,7 @@ from core import models, api
 import json
 
 app = Flask(__name__)
-app.config.from_object('core.config.DevelopmentConfig')
+app.config.from_object('core.config.ProductionConfig')
 app.register_blueprint(api.app, url_prefix='/api')
 app.register_blueprint(user.app)
 app.register_blueprint(admin.app, url_prefix='/a')

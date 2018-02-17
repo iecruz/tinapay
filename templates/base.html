@@ -30,17 +30,20 @@
         <h1 class="display-4 text-center mb-0">Tinapay</h1>
         <h4 class="text-center mb-2 mb-md-3">Bread is life</h4>
         <hr class="border border-dark my-2">
-        <div class="d-flex flex-md-row justify-content-md-around flex-md-wrap flex-column">
-            <a href="{{ url_for('index') }}" class="text-center text-black font-weight-bold">Home</a>
-            <a href="{{ url_for('menu') }}" class="text-center text-black font-weight-bold">Bread</a>
-            {% if session['username'] %}
-            <a href="{{ url_for('shop.shop') }}" class="text-center text-black font-weight-bold">Shop</a>
-            <a href="{{ url_for('user.profile') }}" class="text-center text-black font-weight-bold">Profile</a>
-            <a href="{{ url_for('user.logout') }}" class="text-center text-black font-weight-bold">Logout</a>
-            {% else %}
-            <a href="{{ url_for('user.register') }}" class="text-center text-black font-weight-bold">Register</a>
-            <a href="{{ url_for('user.login') }}" class="text-center text-black font-weight-bold">Login</a>
-            {% endif %}
+        <a href="#menuCollapse" data-toggle="collapse" class="d-md-none d-block text-black text-center font-weight-bold">Menu</a>
+        <div id="menuCollapse" class="collapse show">
+            <div class="d-flex flex-md-row justify-content-md-around flex-md-wrap flex-column">
+                <a href="{{ url_for('index') }}" class="text-center text-black font-weight-bold">Home</a>
+                <a href="{{ url_for('menu') }}" class="text-center text-black font-weight-bold">Bread</a>
+                {% if session['username'] %}
+                <a href="{{ url_for('shop.shop') }}" class="text-center text-black font-weight-bold">Shop</a>
+                <a href="{{ url_for('user.profile') }}" class="text-center text-black font-weight-bold">Profile</a>
+                <a href="{{ url_for('user.logout') }}" class="text-center text-black font-weight-bold">Logout</a>
+                {% else %}
+                <a href="{{ url_for('user.register') }}" class="text-center text-black font-weight-bold">Register</a>
+                <a href="{{ url_for('user.login') }}" class="text-center text-black font-weight-bold">Login</a>
+                {% endif %}
+            </div>
         </div>
         <hr class="border border-dark my-2">
     </div>
