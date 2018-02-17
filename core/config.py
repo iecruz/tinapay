@@ -10,7 +10,7 @@ class Config(object):
 class DevelopmentConfig(Config):
     DEBUG=True
 
-class DevelopmentConfig(Config):
+class TestingConfig(Config):
     TESTING=True
 
 class ProductionConfig(Config):
