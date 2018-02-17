@@ -66,7 +66,7 @@ def profile():
             .select()
             .where(Order.user==session['username'])
             .order_by(Order.date.desc())
-            .limit(10)
+            .limit(6)
             .dicts()]
     except DoesNotExist:
         order=None

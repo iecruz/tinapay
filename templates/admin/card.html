@@ -7,11 +7,11 @@
 {% endblock %}
 
 {% block inner_content %}
-<h2 class="text-center font-weight-bold mb-4">Orders today</h2>
+<h2 class="text-center font-weight-bold mb-2 mb-md-4">Orders today</h2>
 <div class="row">
     {% for order in order %}
     <div class="col-12 col-md-4">
-        <div class="card card-body rounded-0 border border-dark">
+        <div class="card card-body rounded-0 border border-dark my-1 my-md-0">
             <h4 class="text-center font-weight-bold">{{ order['user_name'] }}</h4>
             <ul>
                 {% for item in item if item['order'] == order['id'] %}
