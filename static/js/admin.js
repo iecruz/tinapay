@@ -19,7 +19,7 @@ function orderVoid(e) {
     var data = {
         id: $(e.target).attr('data-key'),
         username: $(e.target).attr('data-user'),
-        status: 'Void'
+        status: 'Voided'
     };
 
     orderChangeStatus(data).done(function(response) {

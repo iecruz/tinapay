@@ -7,8 +7,6 @@ from core import models, api
 
 import json
 
-monkey.patch_all()
-
 app = Flask(__name__)
 app.config.from_object('core.config.ProductionConfig')
 app.register_blueprint(api.app, url_prefix='/api')
@@ -47,4 +45,4 @@ def handle_delivery(message):
     emit('order notification', message, namespace="/{}".format(message['username']), broadcast=True)
 
 if __name__ == '__main__':
-    socketio.run(app)
+    socketio.run(app, debug=app.config['DEBUG'])

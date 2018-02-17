@@ -1,21 +1,21 @@
 {% extends "base.html" %}
 
 {% block inner_content %}
-<div class="row mt-0 mt-md-3">
+<div class="row mt-0 mt-md-2">
     <div class="col-12 col-md-4">
-        <h4 class="text-center">{{ session['first_name'] }} {{ session['last_name'] }}</h4>
+        <h4 class="text-center my-0 my-md-2">{{ session['first_name'] }} {{ session['last_name'] }}</h4>
         <hr class="d-block d-md-none border border-dark">
         <div class="list-group list-group-flush">
-            <a href="#" class="list-group-item list-group-item-action text-black"><i class="fa fa-history mr-2"></i>Order History</a>
-            <a href="#" class="list-group-item list-group-item-action text-black"><i class="fa fa-cog mr-2"></i>Settings</a>
-            <a href="#" class="list-group-item list-group-item-action text-black"><i class="fa fa-comment mr-2"></i>Send Feedback</a>
-            <a href="{{ url_for('user.logout') }}" class="list-group-item list-group-item-action text-black"><i class="fa fa-sign-out-alt mr-2"></i>Logout</a>
+            <a href="#" class="list-group-item list-group-item-action border-0 text-black"><i class="fa fa-history mr-2"></i>Order History</a>
+            <a href="#" class="list-group-item list-group-item-action border-0 text-black"><i class="fa fa-cog mr-2"></i>Settings</a>
+            <a href="#" class="list-group-item list-group-item-action border-0 text-black"><i class="fa fa-comment mr-2"></i>Send Feedback</a>
+            <a href="{{ url_for('user.logout') }}" class="list-group-item list-group-item-action border-0 text-black"><i class="fa fa-sign-out-alt mr-2"></i>Logout</a>
         </div>
     </div>
 
     <div class="col-12 col-md-8">
         <hr class="d-block d-md-none border border-dark">
-        <h4 class="text-center">Recent Order</h4>
+        <h4 class="text-center my-0 my-md-2">Recent Order</h4>
         <hr class="d-block d-md-none border border-dark">
         <div class="card-columns mt-3">
             {% for order in order %}

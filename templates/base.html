@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Tinapay PH</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='image/favicon.png') }}" type="image/x-icon">
+    <title>Tinapay</title>
 
     {% block head %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -23,7 +24,7 @@
     <script defer src="{{ url_for('static', filename='js/script.js') }}"></script>
     {% endblock %}
 </head>
-<body class="bg-white text-black py-4" {% if session['username'] %} data-user="{{ session['username'] }}" {% endif %}>
+<body class="position-relative bg-white text-black py-4" {% if session['username'] %} data-user="{{ session['username'] }}" {% endif %}>
     {% block nav %}
     <div class="container py-md-3">
         <h1 class="display-4 text-center mb-0">Tinapay</h1>
@@ -48,15 +49,18 @@
     </div>
     {% endblock %}
 
+    <div class="notif-alert d-none d-md-inline-block position-fixed w-25 p-3" style="z-index: 9999; overflow-x: auto; top: 0%; right: 0%;"></div>
+    <div class="notif-alert d-md-none d-inline-block position-fixed w-75 p-3" style="z-index: 7777; overflow-x: auto; top: 0%; right: 0%;"></div>
+
     {% block outer_content %}
-        <div class="container py-3 py-md-3">
+        <div class="container py-3 py-md-2">
             {% block inner_content %}
             {% endblock inner_content %}
         </div>
     {% endblock outer_content %}
 
     {% block footer %}
-    <div class="container mt-5 mb-4">
+    <div class="container mt-2 mt-md-5 mb-4">
         <hr class="border border-dark">
         <div class="row justify-content-around">
             <div class="col-12 col-md-4 my-2 my-md-0">
