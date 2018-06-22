@@ -1,16 +1,13 @@
 from flask import Flask
 from peewee import *
+from playhouse.db_url import connect
 import datetime
+import os
 
 app=Flask(__name__)
 app.config.from_object('core.config.ProductionConfig')
 
-db=PostgresqlDatabase(
-    app.config['DB_DATABASE'],
-    user=app.config['DB_USER'],
-    password=app.config['DB_PASSWORD'],
-    host=app.config['DB_HOST']
-)
+db=connect(os.getenv('DATABASE_URL'))
 
 class BaseModel(Model):
     class Meta:
