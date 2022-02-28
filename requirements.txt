@@ -10,7 +10,7 @@ gunicorn==18.0
 itsdangerous==0.24
 Jinja2==2.10
 MarkupSafe==1.1.1
-peewee==3.0.15
+peewee==3.9.0
 psycopg2==2.7.4
 pycparser==2.18
 python-engineio==2.0.2
